@@ -110,3 +110,35 @@ struct Contact {
     let name: PersonalName
     let email: EmailInfo
 }
+
+// Extra1 - Making illegal states imposible
+// Add Postal Address, following bussiness rule: A contact must have email or postalAddress
+
+struct PostalAddress {
+    // Not important for playground
+}
+
+enum ContactInfoExtra1 {
+    case email(Email)
+    case postalAddress(PostalAddress)
+    case emailAndPostalAddress(Email, PostalAddress)
+}
+
+struct ContactExtra1 {
+    let name: PersonalName
+    let contactInfo: ContactInfoExtra1
+}
+
+// Extra2 - Making illegal states imposible
+// Add Postal Address, following bussiness rule: A contact must have at least one way of being contacted
+
+enum ContactInfo {
+    case email(Email)
+    case postalAddress(PostalAddress)
+}
+
+struct ContactExtra2 {
+    let name: PersonalName
+    let primaryContactInfo: ContactInfo
+    let secondaryContactInfo: ContactInfo?
+}
