@@ -85,6 +85,21 @@ struct ContactLinkedData {
 }
 
 // Step 3 - Encoding domain logic
+// Rule 1: If email has changed, verify needs to be set to false
+// Rule 2: The verify flag can be only set by a verification service
+
+protocol VerificationService {
+    typealias VerificationHash = String // Not important for playground
+    func verify(email: Email, hash: VerificationHash) -> VerifiedEmail
+}
+
+struct VerifiedEmail {
+    let value: String
+    
+    init(email: Email) { // accessible only for VerificationService
+        self.value = email.value
+    }
+}
 
 enum EmailInfo {
     case verfied(Email)
